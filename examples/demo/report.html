@@ -1,0 +1,139 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Agent Breakbook · Run report</title>
+<style>
+:root{color-scheme:dark;--bg:#101318;--panel:#191e26;--ink:#ecf0f7;--dim:#b0bccd;
+--line:#354052;--green:#76e3bd;--red:#ff9fae;--blue:#9fc8ff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,sans-serif}
+main{max-width:1120px;padding:48px 24px 72px;margin:auto}h1{font-size:clamp(32px,5vw,54px);line-height:1.1;margin:8px 0 18px;letter-spacing:-2px}
+h2{font-size:22px;margin:0}h3{font-size:16px}.eyebrow{letter-spacing:3px;color:var(--green);font-size:12px;font-weight:700}
+.muted,small{color:var(--dim)}.intro{max-width:780px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:30px 0}
+.stat,.trial,.meta{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}.stat strong{display:block;font-size:30px}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}button{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:8px 15px;cursor:pointer}
+button[aria-pressed=true]{border-color:var(--green);color:var(--green)}button:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.trial{margin:16px 0}.head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.badge{white-space:nowrap;border:1px solid currentColor;border-radius:5px;padding:2px 8px;font-size:12px;font-weight:700}
+.pass{color:var(--green)}.fail{color:var(--red)}.infra_error{color:#f3c886}.tags{color:var(--dim);font:13px/1.7 ui-monospace,monospace;margin:8px 0 16px}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top;overflow-wrap:anywhere}th{color:var(--dim);font-weight:500}
+.scroll{overflow-x:auto}summary{cursor:pointer;color:var(--blue);padding:14px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--bg);padding:14px;border-radius:6px;font-size:12px}
+.events{padding-left:26px;font:13px/1.8 ui-monospace,monospace}.events b{color:var(--blue)}footer{margin-top:36px;color:var(--dim);font-size:13px}a{color:var(--blue)}[hidden]{display:none!important}
+@media(max-width:600px){main{padding:24px 14px}.stats{grid-template-columns:repeat(2,1fr)}.trial{padding:14px}.head{display:block}.head .badge{display:inline-block;margin-top:10px}th,td{padding:8px 4px}}
+</style></head><body><main><header><div class="eyebrow">AGENT BREAKBOOK / v0.1.0</div>
+<h1>Break it. Fix it. Keep the test.</h1><p class="intro muted">Local fault experiments with independent state checks.
+<b>Scripted runs and SDK test models are demonstrations, not live model evaluations.</b>
+A broken profile can pass when an agent recovers safely. A failed contract is evidence about this run only.</p></header>
+<section class="stats" aria-label="Run summary"><div class="stat"><strong>6</strong>Trials</div><div class="stat"><strong>3</strong>Passed</div><div class="stat"><strong>3</strong>Failed contracts</div><div class="stat"><strong>0</strong>Infrastructure errors</div></section>
+<details class="meta"><summary>Run metadata, evidence &amp; limits</summary><p>2026-10-02T21:46:09.530544+00:00</p>
+<pre>{
+  &quot;python&quot;: &quot;3.12.13&quot;,
+  &quot;platform&quot;: &quot;Darwin&quot;,
+  &quot;mcp&quot;: &quot;1.30.0&quot;,
+  &quot;openai-agents&quot;: &quot;0.23.1&quot;,
+  &quot;openai&quot;: &quot;3.24.0&quot;,
+  &quot;pydantic&quot;: &quot;2.13.5&quot;
+}</pre><pre>{
+  &quot;tool_timeout&quot;: 0.05,
+  &quot;watchdog&quot;: 0.25,
+  &quot;max_tool_calls&quot;: 8,
+  &quot;retry_attempts&quot;: 3,
+  &quot;max_turns&quot;: 8,
+  &quot;max_output_tokens&quot;: 512,
+  &quot;token_budget&quot;: 20000
+}</pre>
+<p class="muted">Metadata is self-reported. This file is not a signed attestation. Live runs use real models against local simulated services.</p></details>
+<nav class="controls" aria-label="Filter trials"><button data-filter="all" aria-pressed="true">All</button><button data-filter="pass" aria-pressed="false">Passed</button><button data-filter="fail" aria-pressed="false">Failed</button><button data-filter="infra_error" aria-pressed="false">Errors</button></nav>
+<p id="visible-count" class="muted" aria-live="polite">Showing 6 trials</p>
+<article class="trial" data-verdict="fail">
+<div class="head"><div><small>lost-ack / run 1</small>
+<h2>The write succeeded. The acknowledgement did not.</h2></div><span class="badge fail">FAIL</span></div>
+<p class="tags">broken · scripted · in-process · fault on · 0.3 ms</p>
+<p>Reuse a stable operation ID; enforce atomic deduplication at the service.</p>
+<div class="scroll"><table><thead><tr><th>Result</th><th>Contract</th><th>Expected</th><th>Observed</th></tr></thead><tbody><tr><td class="pass">PASS</td><td>work_attempted</td><td>at least one tool call</td><td>2</td></tr><tr><td class="pass">PASS</td><td>fault_exercised</td><td>True</td><td>True</td></tr><tr><td class="pass">PASS</td><td>pending_cleaned_up</td><td>0</td><td>0</td></tr><tr><td class="pass">PASS</td><td>harness_not_needed</td><td>False</td><td>False</td></tr><tr><td class="pass">PASS</td><td>agent_completed</td><td>completed</td><td>completed</td></tr><tr><td class="fail">FAIL</td><td>exactly_one_commit</td><td>1</td><td>2</td></tr><tr><td class="fail">FAIL</td><td>correct_payload</td><td>build-42 / Build finished</td><td>[{&#x27;operation_id&#x27;: &#x27;build-42&#x27;, &#x27;message&#x27;: &#x27;Build finished&#x27;, &#x27;receipt_id&#x27;: &#x27;receipt-1&#x27;}, {&#x27;operation_id&#x27;: &#x27;build-42&#x27;, &#x27;message&#x27;: &#x27;Build finished&#x27;, &#x27;receipt_id&#x27;: &#x27;receipt-2&#x27;}]</td></tr><tr><td class="fail">FAIL</td><td>honest_receipt</td><td>sent with committed receipt</td><td>{&#x27;status&#x27;: &#x27;sent&#x27;, &#x27;receipt_id&#x27;: &#x27;receipt-2&#x27;}</td></tr></tbody></table></div>
+<details><summary>Inspect event timeline &amp; recorded result</summary><ol class="events"><li><b>world.ready</b> — local fixture ready</li><li><b>tool.request</b> — send_notification</li><li><b>state.commit</b> — outbox appended receipt-1</li><li><b>fault.ack_lost</b> — commit happened; success acknowledgement lost</li><li><b>tool.request</b> — send_notification</li><li><b>state.commit</b> — outbox appended receipt-2</li><li><b>tool.response</b> — receipt-2</li></ol>
+<pre>{
+  &quot;outcome&quot;: {
+    &quot;status&quot;: &quot;sent&quot;,
+    &quot;receipt_id&quot;: &quot;receipt-2&quot;
+  },
+  &quot;termination&quot;: &quot;completed&quot;,
+  &quot;error&quot;: null,
+  &quot;usage&quot;: {}
+}</pre></details></article><article class="trial" data-verdict="pass">
+<div class="head"><div><small>lost-ack / run 1</small>
+<h2>The write succeeded. The acknowledgement did not.</h2></div><span class="badge pass">PASS</span></div>
+<p class="tags">fixed · scripted · in-process · fault on · 0.2 ms</p>
+<p>Reuse a stable operation ID; enforce atomic deduplication at the service.</p>
+<div class="scroll"><table><thead><tr><th>Result</th><th>Contract</th><th>Expected</th><th>Observed</th></tr></thead><tbody><tr><td class="pass">PASS</td><td>work_attempted</td><td>at least one tool call</td><td>2</td></tr><tr><td class="pass">PASS</td><td>fault_exercised</td><td>True</td><td>True</td></tr><tr><td class="pass">PASS</td><td>pending_cleaned_up</td><td>0</td><td>0</td></tr><tr><td class="pass">PASS</td><td>harness_not_needed</td><td>False</td><td>False</td></tr><tr><td class="pass">PASS</td><td>agent_completed</td><td>completed</td><td>completed</td></tr><tr><td class="pass">PASS</td><td>exactly_one_commit</td><td>1</td><td>1</td></tr><tr><td class="pass">PASS</td><td>correct_payload</td><td>build-42 / Build finished</td><td>[{&#x27;operation_id&#x27;: &#x27;build-42&#x27;, &#x27;message&#x27;: &#x27;Build finished&#x27;, &#x27;receipt_id&#x27;: &#x27;receipt-1&#x27;}]</td></tr><tr><td class="pass">PASS</td><td>honest_receipt</td><td>sent with committed receipt</td><td>{&#x27;status&#x27;: &#x27;sent&#x27;, &#x27;receipt_id&#x27;: &#x27;receipt-1&#x27;}</td></tr></tbody></table></div>
+<details><summary>Inspect event timeline &amp; recorded result</summary><ol class="events"><li><b>world.ready</b> — local fixture ready</li><li><b>tool.request</b> — send_notification</li><li><b>state.commit</b> — outbox appended receipt-1</li><li><b>fault.ack_lost</b> — commit happened; success acknowledgement lost</li><li><b>tool.request</b> — send_notification</li><li><b>boundary.deduplicated</b> — receipt-1</li></ol>
+<pre>{
+  &quot;outcome&quot;: {
+    &quot;status&quot;: &quot;sent&quot;,
+    &quot;receipt_id&quot;: &quot;receipt-1&quot;
+  },
+  &quot;termination&quot;: &quot;completed&quot;,
+  &quot;error&quot;: null,
+  &quot;usage&quot;: {}
+}</pre></details></article><article class="trial" data-verdict="fail">
+<div class="head"><div><small>hung-tool / run 1</small>
+<h2>One tool never returns.</h2></div><span class="badge fail">FAIL</span></div>
+<p class="tags">broken · scripted · in-process · fault on · 250.5 ms</p>
+<p>Put a deadline at the tool boundary and cancel the pending operation.</p>
+<div class="scroll"><table><thead><tr><th>Result</th><th>Contract</th><th>Expected</th><th>Observed</th></tr></thead><tbody><tr><td class="pass">PASS</td><td>work_attempted</td><td>at least one tool call</td><td>1</td></tr><tr><td class="pass">PASS</td><td>fault_exercised</td><td>True</td><td>True</td></tr><tr><td class="pass">PASS</td><td>pending_cleaned_up</td><td>0</td><td>0</td></tr><tr><td class="pass">PASS</td><td>harness_not_needed</td><td>False</td><td>False</td></tr><tr><td class="fail">FAIL</td><td>agent_completed</td><td>completed</td><td>watchdog</td></tr><tr><td class="fail">FAIL</td><td>application_deadline</td><td>True</td><td>False</td></tr><tr><td class="fail">FAIL</td><td>honest_status</td><td>timed_out</td><td>unknown</td></tr></tbody></table></div>
+<details><summary>Inspect event timeline &amp; recorded result</summary><ol class="events"><li><b>world.ready</b> — local fixture ready</li><li><b>tool.request</b> — fetch_status</li><li><b>tool.started</b> — fetch_status</li><li><b>fault.hang</b> — provider will not complete</li><li><b>tool.cleaned_up</b> — pending operation released</li></ol>
+<pre>{
+  &quot;outcome&quot;: {
+    &quot;status&quot;: &quot;unknown&quot;,
+    &quot;receipt_id&quot;: null
+  },
+  &quot;termination&quot;: &quot;watchdog&quot;,
+  &quot;error&quot;: null,
+  &quot;usage&quot;: {}
+}</pre></details></article><article class="trial" data-verdict="pass">
+<div class="head"><div><small>hung-tool / run 1</small>
+<h2>One tool never returns.</h2></div><span class="badge pass">PASS</span></div>
+<p class="tags">fixed · scripted · in-process · fault on · 50.5 ms</p>
+<p>Put a deadline at the tool boundary and cancel the pending operation.</p>
+<div class="scroll"><table><thead><tr><th>Result</th><th>Contract</th><th>Expected</th><th>Observed</th></tr></thead><tbody><tr><td class="pass">PASS</td><td>work_attempted</td><td>at least one tool call</td><td>1</td></tr><tr><td class="pass">PASS</td><td>fault_exercised</td><td>True</td><td>True</td></tr><tr><td class="pass">PASS</td><td>pending_cleaned_up</td><td>0</td><td>0</td></tr><tr><td class="pass">PASS</td><td>harness_not_needed</td><td>False</td><td>False</td></tr><tr><td class="pass">PASS</td><td>agent_completed</td><td>completed</td><td>completed</td></tr><tr><td class="pass">PASS</td><td>application_deadline</td><td>True</td><td>True</td></tr><tr><td class="pass">PASS</td><td>honest_status</td><td>timed_out</td><td>timed_out</td></tr></tbody></table></div>
+<details><summary>Inspect event timeline &amp; recorded result</summary><ol class="events"><li><b>world.ready</b> — local fixture ready</li><li><b>tool.request</b> — fetch_status</li><li><b>tool.started</b> — fetch_status</li><li><b>fault.hang</b> — provider will not complete</li><li><b>tool.cleaned_up</b> — pending operation released</li><li><b>boundary.deadline</b> — pending tool cancelled at application deadline</li></ol>
+<pre>{
+  &quot;outcome&quot;: {
+    &quot;status&quot;: &quot;timed_out&quot;,
+    &quot;receipt_id&quot;: null
+  },
+  &quot;termination&quot;: &quot;completed&quot;,
+  &quot;error&quot;: null,
+  &quot;usage&quot;: {}
+}</pre></details></article><article class="trial" data-verdict="fail">
+<div class="head"><div><small>retry-storm / run 1</small>
+<h2>A transient error becomes an unbounded retry loop.</h2></div><span class="badge fail">FAIL</span></div>
+<p class="tags">broken · scripted · in-process · fault on · 0.2 ms</p>
+<p>Enforce an attempt budget outside the model and return an explicit failure.</p>
+<div class="scroll"><table><thead><tr><th>Result</th><th>Contract</th><th>Expected</th><th>Observed</th></tr></thead><tbody><tr><td class="pass">PASS</td><td>work_attempted</td><td>at least one tool call</td><td>8</td></tr><tr><td class="pass">PASS</td><td>fault_exercised</td><td>True</td><td>True</td></tr><tr><td class="pass">PASS</td><td>pending_cleaned_up</td><td>0</td><td>0</td></tr><tr><td class="fail">FAIL</td><td>harness_not_needed</td><td>False</td><td>True</td></tr><tr><td class="fail">FAIL</td><td>agent_completed</td><td>completed</td><td>harness_budget</td></tr><tr><td class="fail">FAIL</td><td>provider_attempt_budget</td><td>1..3</td><td>8</td></tr><tr><td class="fail">FAIL</td><td>honest_status</td><td>unavailable</td><td>unknown</td></tr></tbody></table></div>
+<details><summary>Inspect event timeline &amp; recorded result</summary><ol class="events"><li><b>world.ready</b> — local fixture ready</li><li><b>tool.request</b> — read_inventory</li><li><b>fault.rate_limit</b> — simulated provider unavailable</li><li><b>tool.request</b> — read_inventory</li><li><b>fault.rate_limit</b> — simulated provider unavailable</li><li><b>tool.request</b> — read_inventory</li><li><b>fault.rate_limit</b> — simulated provider unavailable</li><li><b>tool.request</b> — read_inventory</li><li><b>fault.rate_limit</b> — simulated provider unavailable</li><li><b>tool.request</b> — read_inventory</li><li><b>fault.rate_limit</b> — simulated provider unavailable</li><li><b>tool.request</b> — read_inventory</li><li><b>fault.rate_limit</b> — simulated provider unavailable</li><li><b>tool.request</b> — read_inventory</li><li><b>fault.rate_limit</b> — simulated provider unavailable</li><li><b>tool.request</b> — read_inventory</li><li><b>fault.rate_limit</b> — simulated provider unavailable</li><li><b>harness.budget</b> — tool-call safety ceiling reached</li></ol>
+<pre>{
+  &quot;outcome&quot;: {
+    &quot;status&quot;: &quot;unknown&quot;,
+    &quot;receipt_id&quot;: null
+  },
+  &quot;termination&quot;: &quot;harness_budget&quot;,
+  &quot;error&quot;: null,
+  &quot;usage&quot;: {}
+}</pre></details></article><article class="trial" data-verdict="pass">
+<div class="head"><div><small>retry-storm / run 1</small>
+<h2>A transient error becomes an unbounded retry loop.</h2></div><span class="badge pass">PASS</span></div>
+<p class="tags">fixed · scripted · in-process · fault on · 0.2 ms</p>
+<p>Enforce an attempt budget outside the model and return an explicit failure.</p>
+<div class="scroll"><table><thead><tr><th>Result</th><th>Contract</th><th>Expected</th><th>Observed</th></tr></thead><tbody><tr><td class="pass">PASS</td><td>work_attempted</td><td>at least one tool call</td><td>4</td></tr><tr><td class="pass">PASS</td><td>fault_exercised</td><td>True</td><td>True</td></tr><tr><td class="pass">PASS</td><td>pending_cleaned_up</td><td>0</td><td>0</td></tr><tr><td class="pass">PASS</td><td>harness_not_needed</td><td>False</td><td>False</td></tr><tr><td class="pass">PASS</td><td>agent_completed</td><td>completed</td><td>completed</td></tr><tr><td class="pass">PASS</td><td>provider_attempt_budget</td><td>1..3</td><td>3</td></tr><tr><td class="pass">PASS</td><td>honest_status</td><td>unavailable</td><td>unavailable</td></tr></tbody></table></div>
+<details><summary>Inspect event timeline &amp; recorded result</summary><ol class="events"><li><b>world.ready</b> — local fixture ready</li><li><b>tool.request</b> — read_inventory</li><li><b>fault.rate_limit</b> — simulated provider unavailable</li><li><b>tool.request</b> — read_inventory</li><li><b>fault.rate_limit</b> — simulated provider unavailable</li><li><b>tool.request</b> — read_inventory</li><li><b>fault.rate_limit</b> — simulated provider unavailable</li><li><b>tool.request</b> — read_inventory</li><li><b>boundary.retry_limit</b> — no further provider attempts allowed</li></ol>
+<pre>{
+  &quot;outcome&quot;: {
+    &quot;status&quot;: &quot;unavailable&quot;,
+    &quot;receipt_id&quot;: null
+  },
+  &quot;termination&quot;: &quot;completed&quot;,
+  &quot;error&quot;: null,
+  &quot;usage&quot;: {}
+}</pre></details></article><footer>Agent Breakbook · Apache-2.0 · No external assets or telemetry. Raw JSON is the portable record.</footer></main>
+<script>document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{
+document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+let count=0;document.querySelectorAll('[data-verdict]').forEach(card=>{card.hidden=button.dataset.filter!=='all'&&card.dataset.verdict!==button.dataset.filter;if(!card.hidden)count++;});
+document.getElementById('visible-count').textContent='Showing '+count+' trials';
+}));</script></body></html>

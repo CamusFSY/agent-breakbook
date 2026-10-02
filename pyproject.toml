@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-breakbook"
+version = "0.1.0"
+description = "Executable agent failures, concrete fixes, and regression tests you can take home."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+authors = [{ name = "CamusFSY" }]
+keywords = ["agents", "mcp", "testing", "reliability", "regression"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Testing",
+]
+dependencies = ["mcp==1.30.0", "pydantic>=2.11,<3"]
+
+[project.optional-dependencies]
+openai = ["openai-agents==0.23.1"]
+
+[project.scripts]
+breakbook = "breakbook.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/CamusFSY/agent-breakbook"
+Issues = "https://github.com/CamusFSY/agent-breakbook/issues"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "pytest-asyncio>=1,<2", "ruff>=0.12,<1", "build>=1.2,<2"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/breakbook/reports.py" = ["E501"] # Embedded standalone HTML/CSS.
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/breakbook"]

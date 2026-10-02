@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="agent-breakbook" tests="6" failures="3" errors="0" time="0.302">
+  <testcase classname="breakbook.scripted.lost-ack" name="broken.fault-True.run-1" time="0.000">
+    <properties>
+      <property name="evidence" value="scripted" />
+    </properties>
+    <failure message="exactly_one_commit; correct_payload; honest_receipt">exactly_one_commit: expected 1; got 2
+correct_payload: expected build-42 / Build finished; got [{'operation_id': 'build-42', 'message': 'Build finished', 'receipt_id': 'receipt-1'}, {'operation_id': 'build-42', 'message': 'Build finished', 'receipt_id': 'receipt-2'}]
+honest_receipt: expected sent with committed receipt; got {'status': 'sent', 'receipt_id': 'receipt-2'}</failure>
+    <system-out>evidence=scripted; termination=completed</system-out>
+  </testcase>
+  <testcase classname="breakbook.scripted.lost-ack" name="fixed.fault-True.run-1" time="0.000">
+    <properties>
+      <property name="evidence" value="scripted" />
+    </properties>
+    <system-out>evidence=scripted; termination=completed</system-out>
+  </testcase>
+  <testcase classname="breakbook.scripted.hung-tool" name="broken.fault-True.run-1" time="0.250">
+    <properties>
+      <property name="evidence" value="scripted" />
+    </properties>
+    <failure message="agent_completed; application_deadline; honest_status">agent_completed: expected completed; got watchdog
+application_deadline: expected True; got False
+honest_status: expected timed_out; got unknown</failure>
+    <system-out>evidence=scripted; termination=watchdog</system-out>
+  </testcase>
+  <testcase classname="breakbook.scripted.hung-tool" name="fixed.fault-True.run-1" time="0.051">
+    <properties>
+      <property name="evidence" value="scripted" />
+    </properties>
+    <system-out>evidence=scripted; termination=completed</system-out>
+  </testcase>
+  <testcase classname="breakbook.scripted.retry-storm" name="broken.fault-True.run-1" time="0.000">
+    <properties>
+      <property name="evidence" value="scripted" />
+    </properties>
+    <failure message="harness_not_needed; agent_completed; provider_attempt_budget; honest_status">harness_not_needed: expected False; got True
+agent_completed: expected completed; got harness_budget
+provider_attempt_budget: expected 1..3; got 8
+honest_status: expected unavailable; got unknown</failure>
+    <system-out>evidence=scripted; termination=harness_budget</system-out>
+  </testcase>
+  <testcase classname="breakbook.scripted.retry-storm" name="fixed.fault-True.run-1" time="0.000">
+    <properties>
+      <property name="evidence" value="scripted" />
+    </properties>
+    <system-out>evidence=scripted; termination=completed</system-out>
+  </testcase>
+</testsuite>
